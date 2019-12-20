@@ -14,34 +14,24 @@ class ListNode:
     self.next = None
 
 class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-      if l2 == None:
-        l2 = ListNode(0)
+  def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    if l2 == None:
+      l2 = ListNode(0)
 
-      if l1 == None:
-        l1 = ListNode(0)
-      
-      nextVar = ListNode(l1.val+l2.val)
-      if nextVar.val >= 10:
-        nextVar.val = nextVar.val-10
-        if l2.next != None:
-          l2.next.val = l2.next.val+1
-        elif l1.next != None:
-          l1.next.val = l1.next.val+1
-        else:
-          l1.next = ListNode(1)
-      if l1.next != None or l2.next != None:
-        # the remaining list is just equal to l2
-        nextVar.next = self.addTwoNumbers(l1.next,l2.next)
+    if l1 == None:
+      l1 = ListNode(0)
+    
+    nextVar = ListNode(l1.val+l2.val)
+    if nextVar.val >= 10:
+      nextVar.val = nextVar.val-10
+      if l2.next != None:
+        l2.next.val = l2.next.val+1
+      elif l1.next != None:
+        l1.next.val = l1.next.val+1
+      else:
+        l1.next = ListNode(1)
+    if l1.next != None or l2.next != None:
+      # the remaining list is just equal to l2
+      nextVar.next = self.addTwoNumbers(l1.next,l2.next)
 
-      return nextVar
-
-l11 = ListNode(1)
-
-l21 = ListNode(9)
-l22 = ListNode(9)
-l22.next = l21
-
-s = Solution()
-j = s.addTwoNumbers(l11,l22)
-print(j.val, j.next.val, j.next.next.val)
+    return nextVar
